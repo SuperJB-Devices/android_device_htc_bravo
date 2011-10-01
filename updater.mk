@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2008 The Android Open Source Project
+# Copyright (C) 2011, SuperTeam Development Group.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +13,17 @@
 # limitations under the License.
 #
 
-# This file is executed by build/envsetup.sh, and can use anything
-# defined in envsetup.sh.
-#
-# In particular, you can add lunch options with the add_lunch_combo
-# function: add_lunch_combo generic-eng
+ST_SYSTEM_FS := yaffs2
+ST_SYSTEM_BLOCK := MTD
+ST_SYSTEM_DEV := system
+ST_SYSTEM_NAME := /system
 
-add_lunch_combo full_bravo-userdebug
-add_lunch_combo full_bravo-eng
+ST_DATA_FS := yaffs2
+ST_DATA_BLOCK := MTD
+ST_DATA_DEV := userdata
+ST_DATA_NAME := /data
+
+ST_BOOT_FS := yaffs2
+ST_BOOT_BLOCK := MTD
+ST_BOOT_DEV := /dev/block/mmcblk0p5
+ST_BOOT_NAME := /boot

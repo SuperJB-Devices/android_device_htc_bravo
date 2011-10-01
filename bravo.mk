@@ -21,6 +21,9 @@
 
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
+
+$(call inherit-product, device/htc/bravo/kernel.mk)
+
 PRODUCT_COPY_FILES += \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc
 
@@ -115,14 +118,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/htc/bravo/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
-
 # stuff common to all HTC phones
 $(call inherit-product, device/htc/common/common.mk)
+
+
