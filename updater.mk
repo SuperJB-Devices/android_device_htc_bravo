@@ -23,7 +23,8 @@ ST_DATA_BLOCK := MTD
 ST_DATA_DEV := userdata
 ST_DATA_NAME := /data
 
+ST_BOOT_METHOD := raw
 ST_BOOT_FS := yaffs2
 ST_BOOT_BLOCK := MTD
-ST_BOOT_DEV := /dev/block/mmcblk0p5
+ST_BOOT_DEV := /boot
 ST_BOOT_NAME := /boot

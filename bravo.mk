@@ -107,7 +107,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Bravo uses high-density artwork where available
-PRODUCT_LOCALES := hdpi
+PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
     device/htc/bravo/bravo-keypad.kl:system/usr/keylayout/bravo-keypad.kl \
