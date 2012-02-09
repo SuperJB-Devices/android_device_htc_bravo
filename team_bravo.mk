@@ -2,6 +2,7 @@ $(call inherit-product, vendor/SuperTeam/products/high_telephony_device.mk)
 
 $(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
 
+$(call inherit-product, device/htc/bravo/kernel.mk)
 #
 # Setup device specific product configuration.
 #
