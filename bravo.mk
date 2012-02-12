@@ -14,37 +14,6 @@
 # limitations under the License.
 #
 
-#
-# This is the product configuration for a generic GSM bravo,
-# not specialized for any geography.
-#
-
-## (1) First, the most specific values, i.e. the aspects that are specific to GSM
-
-
-$(call inherit-product, device/htc/bravo/kernel.mk)
-
-PRODUCT_COPY_FILES += \
-    device/htc/bravo/init.bravo.rc:root/init.bravo.rc
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
-    rild.libpath=/system/lib/libhtc_ril.so \
-    ro.ril.ecc.HTC-ELL=92,93,94 \
-    ro.ril.ecc.HTC-WWE=999 \
-    ro.ril.enable.a52.HTC-ITA=1 \
-    ro.ril.enable.a53.HTC-ITA=1 \
-    ro.ril.enable.a52=0 \
-    ro.ril.enable.a53=1 \
-    ro.ril.enable.dtm = 1 \
-    ro.ril.gprsclass = 12 \
-    ro.ril.hsdpa.category=8 \
-    ro.ril.hsupa.category=5 \
-    ro.ril.hsxpa=2 \
-    wifi.interface=eth0 \
-    wifi.supplicant_scan_interval=15 \
-    mobiledata.interfaces=rmnet0,rmnet1,rmnet2
-
 # Default network type.
 # 0 => WCDMA preferred.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -54,42 +23,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.enable.prl.recognition=1
 
-# AGPS otpions
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.def.agps.mode=2
-
-# The OpenGL ES API level that is natively supported by this device.
-# This is a 16.16 fixed point number
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
-
 # This is a high density device with more memory, so larger vm heaps for it.
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=32m
-
-## (2) Also get non-open-source GSM-specific aspects if available
-$(call inherit-product-if-exists, vendor/htc/bravo/bravo-vendor.mk)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.media.dec.jpeg.memcap=20000000
-
-DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
-
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
-
-# media config xml file
-PRODUCT_COPY_FILES += \
-    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PACKAGES += \
     sensors.bravo \
@@ -98,27 +34,19 @@ PRODUCT_PACKAGES += \
     gralloc.qsd8k \
     copybit.qsd8k \
     bravo-keypad.kcm \
-    gps.bravo \
+    #gps.bravo \
     libOmxCore \
-    libOmxVidEnc \
-    com.android.future.usb.accessory
+    libOmxVidEnc
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Bravo uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
     device/htc/bravo/bravo-keypad.kl:system/usr/keylayout/bravo-keypad.kl \
     device/htc/bravo/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/bravo/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
-    device/htc/bravo/vold.fstab:system/etc/vold.fstab
-
-PRODUCT_COPY_FILES += \
+    device/htc/bravo/vold.fstab:system/etc/vold.fstab \
+    device/htc/bravo/kernel:kernel \
     device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
-
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
-
-
+    device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
+    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml

@@ -1,8 +1,12 @@
 $(call inherit-product, vendor/SuperTeam/products/high_telephony_device.mk)
 
+$(call inherit-product, vendor/SuperTeam/products/usbaccessory.mk)
+
+$(call inherit-product, vendor/SuperTeam/products/flash.mk)
+
 $(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
 
-$(call inherit-product, device/htc/bravo/kernel.mk)
+$(call inherit-product, device/htc/bravo/bravo.mk)
 
 #
 # Setup device specific product configuration.
@@ -34,7 +38,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.hsxpa=2 \
     ro.ril.def.agps.mode=2 \
     wifi.interface=eth0 \
-    wifi.supplicant_scan_interval=15 \
     mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
     ro.media.dec.jpeg.memcap=20000000 \
     dalvik.vm.heapsize=48m \
