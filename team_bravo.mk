@@ -3,6 +3,7 @@ $(call inherit-product, vendor/SuperTeam/products/high_telephony_device.mk)
 $(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
 
 $(call inherit-product, device/htc/bravo/kernel.mk)
+
 #
 # Setup device specific product configuration.
 #
@@ -40,3 +41,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
+
+PRODUCT_VERSION_MAINTENANCE := 9999
