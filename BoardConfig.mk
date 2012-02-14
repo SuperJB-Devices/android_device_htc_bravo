@@ -30,9 +30,11 @@ USE_CAMERA_STUB := true
 
 TARGET_NO_BOOTLOADER := true
 
-TARGET_BOARD_PLATFORM := qsd8kcom
+TARGET_BOARD_PLATFORM := qsd8k
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-
+USE_OPENGL_RENDERER := false
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS -DUNABLE_TO_DEQUEUE
+COMMON_GLOBAL_CFLAGS += -DCOPYBIT_QSD8K
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -101,4 +103,32 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1 msmsdcc_sdioirq=1 wire.search_count
 BOARD_KERNEL_BASE := 0x20000000
 BOARD_KERNEL_NEW_PPPOX := true
 
+
+
+# FPU compilation flags
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+
+TARGET_SPECIFIC_HEADER_PATH := device/htc/bravo/include
+
+# Hardware rendering
+
+# qsd dont have overlay support in kernel
+TARGET_USE_OVERLAY := false
+# qsd dont have bypass
+TARGET_HAVE_BYPASS := false
+
+# RIL
+BOARD_USE_NEW_LIBRIL_HTC := true
+
+# Misc
+BOARD_USE_OPENSSL_ENGINE := true
+
+# Hacks
+BOARD_USES_LEGACY_QCOM := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
+BOARD_USE_LEGACY_TRACKPAD := true
+
+BOARD_SYSTEMIMAGE_PARTITION_SIZE :=  262144000 # 0x09100000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 154140672 # 0x093a0000
 

@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+$(call inherit-product, vendor/htc/bravo/bravo-vendor.mk)
+
 # Default network type.
 # 0 => WCDMA preferred.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -27,16 +29,41 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=32m
 
-PRODUCT_PACKAGES += \
-    sensors.bravo \
+# Sensors
+PRODUCT_PACKAGES := \
+    gps.bravo \
     lights.bravo \
-    librs_jni \
-    gralloc.qsd8k \
+    sensors.bravo \
+    camera.qsd8k
+# Audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    audio.primary.qsd8k \
+    audio_policy.qsd8k \
+    libaudioutils
+# GPU
+PRODUCT_PACKAGES += \
     copybit.qsd8k \
-    bravo-keypad.kcm \
-    #gps.bravo \
+    gralloc.qsd8k \
+    hwcomposer.default \
+    hwcomposer.qsd8k
+#    libgenlock \
+#    libmemalloc \
+#    liboverlay \
+#    libtilerenderer \
+#    libQcomUI
+# Omx
+PRODUCT_PACKAGES += \
     libOmxCore \
-    libOmxVidEnc
+    libOmxVenc \
+    libOmxVdec \
+    libOmxVidEnc \
+    libstagefrighthw
+
+PRODUCT_PACKAGES += \
+    librs_jni \
+    bravo-keypad.kcm \
+
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -49,4 +76,5 @@ PRODUCT_COPY_FILES += \
     device/htc/bravo/kernel:kernel \
     device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
-    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml
+    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml \
+    device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so
