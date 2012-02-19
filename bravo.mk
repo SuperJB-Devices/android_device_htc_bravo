@@ -73,8 +73,10 @@ PRODUCT_COPY_FILES += \
     device/htc/bravo/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/bravo/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
     device/htc/bravo/vold.fstab:system/etc/vold.fstab \
+    device/htc/bravo/ecclist_for_mcc.conf:system/etc/ecclist_for_mcc.conf \
     device/htc/bravo/kernel:kernel \
     device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
+    device/htc/bravo/init.bravo.usb.rc:root/init.bravo.usb.rc \
     device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml \
     device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so
