@@ -6,6 +6,8 @@ $(call inherit-product, vendor/SuperTeam/products/flash.mk)
 
 $(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
 
+$(call inherit-product, vendor/SuperTeam/products/gapps.mk)
+
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
 #
@@ -40,7 +42,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
     ro.media.dec.jpeg.memcap=20000000 \
-    dalvik.vm.heapsize=48m \
     ro.opengles.version=131072
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
