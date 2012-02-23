@@ -6,8 +6,6 @@ $(call inherit-product, vendor/SuperTeam/products/flash.mk)
 
 $(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
 
-$(call inherit-product, vendor/SuperTeam/products/gapps.mk)
-
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
 #
