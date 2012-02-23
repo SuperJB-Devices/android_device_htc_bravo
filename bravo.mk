@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, vendor/htc/bravo/bravo-vendor.mk)
+$(call inherit-product-if-exists, vendor/htc/bravo/bravo-vendor.mk)
 
 # Default network type.
 # 0 => WCDMA preferred.
