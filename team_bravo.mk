@@ -1,3 +1,5 @@
+TEAM_PRODUCT := bravo
+
 $(call inherit-product, vendor/SuperTeam/products/high_telephony_device.mk)
 
 $(call inherit-product, vendor/SuperTeam/products/usbaccessory.mk)
