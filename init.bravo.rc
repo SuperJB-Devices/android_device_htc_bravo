@@ -47,6 +47,11 @@ on boot
     chown system camera /sys/devices/platform/flashlight.0/leds/flashlight/brightness
     chmod 0660          /sys/devices/platform/flashlight.0/leds/flashlight/brightness
     
+    #Camera
+    chown system camera /dev/msm_camera/control0
+    chown system camera /dev/msm_camera/frame0
+    chown system camera /dev/msm_camera/config0
+    
     # enable the GPS
     setprop ro.ril.def.agps.mode 2
 
