@@ -1,12 +1,12 @@
 TEAM_PRODUCT := bravo
 
-$(call inherit-product, vendor/SuperTeam/products/high_telephony_device.mk)
+$(call inherit-product, vendor/osr/products/high_telephony_device.mk)
 
-$(call inherit-product, vendor/SuperTeam/products/usbaccessory.mk)
+$(call inherit-product, vendor/osr/products/usbaccessory.mk)
 
-$(call inherit-product, vendor/SuperTeam/products/flash.mk)
+$(call inherit-product, vendor/osr/products/flash.mk)
 
-$(call inherit-product, vendor/SuperTeam/products/hdpi.mk)
+$(call inherit-product, vendor/osr/products/hdpi.mk)
 
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
