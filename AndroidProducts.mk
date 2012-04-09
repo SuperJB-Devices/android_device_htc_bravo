@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/team_bravo.mk
+    $(LOCAL_DIR)/osr_bravo.mk
