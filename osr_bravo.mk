@@ -13,7 +13,7 @@ $(call inherit-product, device/htc/bravo/bravo.mk)
 #
 # Setup device specific product configuration.
 #
-PRODUCT_NAME := team_bravo
+PRODUCT_NAME := osr_bravo
 PRODUCT_BRAND := htc_wwe
 PRODUCT_DEVICE := bravo
 PRODUCT_MODEL := HTC Desire
