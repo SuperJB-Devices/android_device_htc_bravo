@@ -58,7 +58,8 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVdec \
     libOmxVidEnc \
-    libstagefrighthw
+    libstagefrighthw \
+    S2E
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -80,4 +81,5 @@ PRODUCT_COPY_FILES += \
     device/htc/bravo/init.bravo.usb.rc:root/init.bravo.usb.rc \
     device/htc/bravo/ueventd.bravo.rc:root/ueventd.bravo.rc \
     device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml \
-    device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so
+    device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so \
+    device/htc/bravo/10mountSDext:system/etc/init.d/10mountSDext

@@ -1,0 +1,47 @@
+#!/system/bin/sh
+
+# Mount sd ext partition, version 1.0
+# By: podxboq (SuperTeam)
+# Date: Feb 29/02/2012
+
+Print="log -p i -t SuperTeam"
+SD_EXT_DIR=/sd-ext
+SD_INT_DIR=/data
+
+# Buscando Particiones
+for MMC_NUM in `seq 0 9`
+do
+    MMC_TYPE=`cat /sys/block/mmcblk$MMC_NUM/device/type`
+    if [ "$MMC_TYPE" = "SD" ]
+    then
+        # 2nd partition of sdcard should be the sd-ext if exist
+        SD_EXT_PART=/dev/block/mmcblk${MMC_NUM}p2
+        break
+    fi
+done
+
+if [ ! -e $SD_EXT_PART ]
+then
+    $Print "No existe particion externa $SD_EXT_PART."
+    exit 0
+fi
+
+a2sdmount=`grep -q -e $SD_EXT_PART /proc/mounts; echo $?`
+if [ $a2sdmount == 1 ]
+then
+	mount -o rw,remount /system
+    mount -o noatime,nodiratime -t ext3 $SD_EXT_PART $SD_EXT_DIR
+    if [ $? != 0 ]
+    then
+	    mount -o noatime,nodiratime -t ext4 $SD_EXT_PART $SD_EXT_DIR
+    	if [ $? != 0 ]
+    	then
+    		mount -o ro,remount /system
+        	$Print "Error al montar la particion externa $SD_EXT_PART en $SD_EXT_DIR."
+        	exit 1
+	    fi
+    fi
+    mount -o ro,remount /system
+fi
+
+exit 0
