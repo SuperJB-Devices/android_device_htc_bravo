@@ -78,5 +78,6 @@ PRODUCT_COPY_FILES += \
     device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
     device/htc/bravo/init.bravo.usb.rc:root/init.bravo.usb.rc \
+    device/htc/bravo/ueventd.bravo.rc:root/ueventd.bravo.rc \
     device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml \
     device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so

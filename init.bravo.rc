@@ -51,6 +51,8 @@ on boot
     chown system camera /dev/msm_camera/control0
     chown system camera /dev/msm_camera/frame0
     chown system camera /dev/msm_camera/config0
+    chown system graphics /dev/graphics/fb0
+    chmod 0666 /dev/graphics/fb0
     
     # enable the GPS
     setprop ro.ril.def.agps.mode 2
