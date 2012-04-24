@@ -41,7 +41,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2 \
     wifi.interface=eth0 \
     mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
-    ro.media.dec.jpeg.memcap=20000000 
+    ro.media.dec.jpeg.memcap=20000000 \
+    persist.sys.usb.config=mass_storage \
+	persist.service.adb.enable=1
+    
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
 
