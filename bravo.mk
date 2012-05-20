@@ -58,12 +58,11 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVdec \
     libOmxVidEnc \
-    libstagefrighthw \
-    S2E
+    libstagefrighthw
 
 PRODUCT_PACKAGES += \
     librs_jni \
-    bravo-keypad.kcm \
+    bravo-keypad.kcm
 
 
 # we have enough storage space to hold precise GC data

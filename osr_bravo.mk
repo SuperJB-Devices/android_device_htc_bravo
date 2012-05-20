@@ -1,4 +1,5 @@
 TEAM_PRODUCT := bravo
+TINY_GAAPS := True
 
 $(call inherit-product, vendor/osr/products/high_telephony_device.mk)
 
@@ -9,6 +10,8 @@ $(call inherit-product, vendor/osr/products/flash.mk)
 $(call inherit-product, vendor/osr/products/hdpi.mk)
 
 $(call inherit-product, device/htc/bravo/bravo.mk)
+
+$(call inherit-product, vendor/osr/products/themes_common.mk)
 
 #
 # Setup device specific product configuration.
@@ -44,11 +47,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=20000000 \
     persist.sys.usb.config=mass_storage \
 	persist.service.adb.enable=1
+	
+PRODUCT_PACKAGES += \
+    S2E \
+	ContactsWidgets
     
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
 
-PRODUCT_VERSION_MAINTENANCE := 0
+PRODUCT_VERSION_MAINTENANCE ?= 2
 
 VENDOR_WIPE_USER_DATA := true
 VENDOR_COPY_USER_DATA := true
