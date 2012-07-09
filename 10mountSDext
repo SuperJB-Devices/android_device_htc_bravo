@@ -41,6 +41,16 @@ then
         	exit 1
 	    fi
     fi
+    
+    if [ ! -h $SD_INT_DIR/app ]
+    then
+    	if [ ! -d $SD_EXT_DIR/app ]
+    	then
+    		mkdir $SD_EXT_DIR/app
+    	fi
+    	rm -r $SD_INT_DIR/app
+    	ln -s $SD_EXT_DIR/app $SD_INT_DIR/app 
+    fi
     mount -o ro,remount /system
 fi
 

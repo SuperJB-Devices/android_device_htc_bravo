@@ -49,13 +49,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.service.adb.enable=1
 	
 PRODUCT_PACKAGES += \
-    S2E \
-	ContactsWidgets
+    ContactsWidgets
     
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
 
-PRODUCT_VERSION_MAINTENANCE ?= 4
+PRODUCT_VERSION_MAINTENANCE := 4
 
 VENDOR_WIPE_USER_DATA := true
 VENDOR_COPY_USER_DATA := true
