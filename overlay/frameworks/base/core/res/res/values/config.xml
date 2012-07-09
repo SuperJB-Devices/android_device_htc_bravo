@@ -200,4 +200,11 @@
          free space above this threshold value. -->
     <integer name="config_downloadDataDirLowSpaceThreshold">10</integer>
 
+    <string name="config_datause_iface">wlan0</string>
+
+    <integer name="navigation_bar_home_longpress">1</integer>
+    
+    <integer name="lockscreen_enable_trackball_key">1</integer>
+    
+    <integer name="statusbar_toggles_style">1</integer>
 </resources>
