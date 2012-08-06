@@ -71,6 +71,8 @@ BOARD_EGL_CFG := device/htc/bravo/egl.cfg
 BOARD_USE_FROYO_LIBCAMERA := true
 
 BOARD_HAVE_FM_RADIO := true
+BOARD_FM_DEVICE := bcm4329
+BOARD_HAVE_QCOM_FM := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 # # cat /proc/mtd
