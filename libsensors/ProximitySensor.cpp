@@ -24,8 +24,6 @@
 
 #include <linux/capella_cm3602.h>
 
-#include <cutils/log.h>
-
 #include "ProximitySensor.h"
 
 /*****************************************************************************/
@@ -78,7 +76,6 @@ int ProximitySensor::enable(int32_t, int en) {
         int flags = newState;
         err = ioctl(dev_fd, CAPELLA_CM3602_IOCTL_ENABLE, &flags);
         err = err<0 ? -errno : 0;
-        LOGE_IF(err, "CAPELLA_CM3602_IOCTL_ENABLE failed (%s)", strerror(-err));
         if (!err) {
             mEnabled = newState;
             if (en) {
@@ -128,9 +125,6 @@ int ProximitySensor::readEvents(sensors_event_t* data, int count)
                 count--;
                 numEventReceived++;
             }
-        } else {
-            LOGE("ProximitySensor: unknown event (type=%d, code=%d)",
-                    type, event->code);
         }
         mInputReader.next();
     }

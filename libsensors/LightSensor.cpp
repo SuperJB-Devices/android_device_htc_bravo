@@ -24,8 +24,6 @@
 
 #include <linux/lightsensor.h>
 
-#include <cutils/log.h>
-
 #include "LightSensor.h"
 
 /*****************************************************************************/
@@ -77,7 +75,6 @@ int LightSensor::enable(int32_t, int en) {
         }
         err = ioctl(dev_fd, LIGHTSENSOR_IOCTL_ENABLE, &flags);
         err = err<0 ? -errno : 0;
-        LOGE_IF(err, "LIGHTSENSOR_IOCTL_ENABLE failed (%s)", strerror(-err));
         if (!err) {
             mEnabled = en ? 1 : 0;
             if (en) {
@@ -130,9 +127,6 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
                 count--;
                 numEventReceived++;
             }
-        } else {
-            LOGE("LightSensor: unknown event (type=%d, code=%d)",
-                    type, event->code);
         }
         mInputReader.next();
     }

@@ -24,8 +24,6 @@
 
 #include <linux/akm8973.h>
 
-#include <cutils/log.h>
-
 #include "AkmSensor.h"
 
 /*****************************************************************************/
@@ -148,7 +146,6 @@ int AkmSensor::enable(int32_t handle, int en)
         short flags = newState;
         err = ioctl(dev_fd, cmd, &flags);
         err = err<0 ? -errno : 0;
-        LOGE_IF(err, "ECS_IOCTL_APP_SET_XXX failed (%s)", strerror(-err));
         if (!err) {
             mEnabled &= ~(1<<what);
             mEnabled |= (uint32_t(flags)<<what);
@@ -236,8 +233,6 @@ int AkmSensor::readEvents(sensors_event_t* data, int count)
                 mInputReader.next();
             }
         } else {
-            LOGE("AkmSensor: unknown event (type=%d, code=%d)",
-                    type, event->code);
             mInputReader.next();
         }
     }
