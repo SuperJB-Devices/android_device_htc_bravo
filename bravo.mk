@@ -15,6 +15,7 @@
 #
 
 $(call inherit-product-if-exists, vendor/htc/bravo/bravo-vendor.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 # Default network type.
 # 0 => WCDMA preferred.
@@ -35,50 +36,69 @@ PRODUCT_PACKAGES := \
     lights.bravo \
     sensors.bravo \
     camera.qsd8k
+    
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.qsd8k \
     audio_policy.qsd8k \
+    audio.usb.default \
     libaudioutils
+    
 # GPU
 PRODUCT_PACKAGES += \
     copybit.qsd8k \
     gralloc.qsd8k \
-    hwcomposer.default \
     hwcomposer.qsd8k
-#    libgenlock \
-#    libmemalloc \
-#    liboverlay \
-#    libtilerenderer \
-#    libQcomUI
+
 # Omx
 PRODUCT_PACKAGES += \
     libOmxCore \
-    libOmxVenc \
     libOmxVdec \
-    libOmxVidEnc \
     libstagefrighthw
 
 PRODUCT_PACKAGES += \
     librs_jni \
     bravo-keypad.kcm
 
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    make_ext4fs \
+    setup_fs
+
+# Misc
+PRODUCT_PACKAGES += \
+    power.qsd8k \
+    com.android.future.usb.accessory
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# media config xml file
 PRODUCT_COPY_FILES += \
-    device/htc/bravo/bravo-keypad.kl:system/usr/keylayout/bravo-keypad.kl \
-    device/htc/bravo/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
-    device/htc/bravo/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
-    device/htc/bravo/vold.fstab:system/etc/vold.fstab \
-    device/htc/bravo/ecclist_for_mcc.conf:system/etc/ecclist_for_mcc.conf \
-    device/htc/bravo/kernel:kernel \
-    device/htc/bravo/bcm4329.ko:system/lib/modules/bcm4329.ko \
+    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml
+
+
+# Ramdisk
+PRODUCT_COPY_FILES += \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
     device/htc/bravo/init.bravo.usb.rc:root/init.bravo.usb.rc \
-    device/htc/bravo/ueventd.bravo.rc:root/ueventd.bravo.rc \
-    device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml \
-    device/htc/bravo/camera.qsd8k.so:system/lib/hw/camera.qsd8k.so \
-    device/htc/bravo/10mountSDext:system/etc/init.d/10mountSDext
+    device/htc/bravo/ueventd.bravo.rc:root/ueventd.bravo.rc
+    
+# Prebuilt files/configs
+PRODUCT_COPY_FILES += \
+    device/htc/bravo/bravo-keypad.kl:system/usr/keylayout/bravo-keypad.kl \
+    device/htc/bravo/bravo-keypad.kcm:system/usr/keychars/bravo-keypad.kcm \
+    device/htc/bravo/curcial-oj.idc:system/usr/idc/curcial-oj.idc \
+    device/htc/bravo/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
+    device/htc/bravo/h2w_headset.kcm:system/usr/keychars/h2w_headset.kcm \
+    device/htc/bravo/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
+    device/htc/bravo/synaptics-rmi-touchscreen.kl:system/usr/keylayout/synaptics-rmi-touchscreen.kl \
+    device/htc/bravo/synaptics-rmi-touchscreen.kcm:system/usr/keychars/synaptics-rmi-touchscreen.kcm \
+    device/htc/bravo/vold.fstab:system/etc/vold.fstab \
+    device/htc/bravo/ecclist_for_mcc.conf:system/etc/ecclist_for_mcc.conf \
+    device/htc/bravo/sysctl.conf:system/etc/sysctl.conf \
+    device/htc/bravo/10mountSDext:system/etc/init.d/10mountSDext \
+    device/htc/bravo/media_codecs.xml:system/etc/media_codecs.xml \
+    device/htc/bravo/audio_policy.conf:system/etc/audio_policy.conf \
+    device/htc/bravo/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh

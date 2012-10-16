@@ -29,30 +29,42 @@ USE_CAMERA_STUB := true
 -include vendor/htc/bravo/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
+TARGET_BOOTLOADER_BOARD_NAME := bravo
 
 TARGET_BOARD_PLATFORM := qsd8k
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-USE_OPENGL_RENDERER := false
+
+BOARD_EGL_CFG := device/htc/bravo/egl.cfg
+
+USE_OPENGL_RENDERER := true
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS -DUNABLE_TO_DEQUEUE
 COMMON_GLOBAL_CFLAGS += -DCOPYBIT_QSD8K
+# We only have 2 buffers
+TARGET_DISABLE_TRIPLE_BUFFERING := true
+BOARD_NEEDS_MEMORYHEAPPMEM := true
+TARGET_NO_HW_VSYNC := true
+COMMON_GLOBAL_CFLAGS += -DTARGET_8x50
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-TARGET_BOOTLOADER_BOARD_NAME := bravo
+# Bionic optimizations
+TARGET_USE_LINARO_STRING_ROUTINES := true
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER      := WEXT
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
+WIFI_BAND                        := 802_11_ABG
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WLAN_DEVICE                := bcm4329
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_STA_PATH          := "/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH           := "/vendor/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_ARG           := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/proc/calibration"
-WIFI_DRIVER_MODULE_NAME          := "bcm4329"
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE                := bcmdhd
+WIFI_DRIVER_FW_PATH_STA          := "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_P2P          := "/vendor/firmware/fw_bcmdhd_p2p.bin"
+WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
 
 BOARD_USES_GENERIC_AUDIO := false
 
@@ -62,18 +74,16 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 3200
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_LEGACY_QCOM := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 
 BOARD_VENDOR_USE_AKMD := akm8973
 
-BOARD_EGL_CFG := device/htc/bravo/egl.cfg
-
 BOARD_USE_FROYO_LIBCAMERA := true
 
-BOARD_HAVE_FM_RADIO := true
-BOARD_FM_DEVICE := bcm4329
-BOARD_HAVE_QCOM_FM := true
-BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
+#BOARD_HAVE_FM_RADIO := true
+#BOARD_FM_DEVICE := bcm4329
+#BOARD_HAVE_QCOM_FM := true
+#BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name
@@ -95,12 +105,6 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := bravo
 # AMSS version to use for GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 3200
-
-BOARD_KERNEL_CMDLINE := no_console_suspend=1 msmsdcc_sdioirq=1 wire.search_count=5
-BOARD_KERNEL_BASE := 0x20000000
-BOARD_KERNEL_NEW_PPPOX := true
-
-
 
 # FPU compilation flags
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
@@ -125,4 +129,19 @@ BOARD_USE_OPENSSL_ENGINE := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 BOARD_USE_LEGACY_TRACKPAD := true
 
-WITH_DEXPREOPT := true
+# Webkit
+TARGET_FORCE_CPU_UPLOAD := true
+ENABLE_WEBGL := true
+
+# Legacy ril
+COMMON_GLOBAL_CFLAGS += -DRIL_VERSION_2_SUPPORT
+
+# Camcorder
+BOARD_USE_OLD_AVC_ENCODER := true
+BOARD_NO_BFRAMES := true
+
+# Override kernel toolchain. (4.6 is too unstable)
+ifeq ($(LINARO_BUILD),)
+KERNEL_TOOLCHAIN_PREFIX:=$(ANDROID_BUILD_TOP)/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-
+endif
+

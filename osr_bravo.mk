@@ -11,17 +11,17 @@ $(call inherit-product, vendor/osr/products/hdpi.mk)
 
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
+$(call inherit-product, device/htc/bravo/kernel.mk)
+
 $(call inherit-product, vendor/osr/products/themes_common.mk)
 
-#
 # Setup device specific product configuration.
-#
 PRODUCT_NAME := osr_bravo
 PRODUCT_BRAND := htc_wwe
 PRODUCT_DEVICE := bravo
 PRODUCT_MODEL := HTC Desire
 PRODUCT_MANUFACTURER := HTC
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_ID=GRI40 PRODUCT_NAME=htc_bravo BUILD_FINGERPRINT=htc_wwe/htc_bravo/bravo:2.3.3/GRI40/96875.1:user/release-keys TARGET_BUILD_TYPE=userdebug BUILD_VERSION_TAGS=release-keys PRIVATE_BUILD_DESC="3.14.405.1 CL96875 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=htc_bravo BUILD_FINGERPRINT=htc_wwe/htc_bravo/bravo:2.3.3/GRI40/96875.1:user/release-keys TARGET_BUILD_TYPE=userdebug BUILD_VERSION_TAGS=release-keys PRIVATE_BUILD_DESC="3.14.405.1 CL96875 release-keys"
 
 # Extra RIL settings
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -41,20 +41,63 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.hsdpa.category=8 \
     ro.ril.hsupa.category=5 \
     ro.ril.hsxpa=2 \
-    ro.ril.def.agps.mode=2 \
-    wifi.interface=eth0 \
-    mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
+    ro.ril.def.agps.mode=2 
+    
+#    \    
+#    mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
+#    persist.sys.usb.config=mass_storage \
+#	persist.service.adb.enable=1
+    
+# Hardware Rendering Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.composition.type=mdp \
+    debug.gr.numframebuffers=2 \
+    hwui.disable_vsync=true
+
+# Properties for jb
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.disable.power.collapse=0 \
+    windowsmgr.max_events_per_sec=120 \
+    ro.opengles.version=131072 \
+    ro.telephony.default_network=3 \
+    ro.ril.enable.prl.recognition=1 \
+    ro.telephony.ril.v3=signalstrength,singlepdp \
+    ro.vold.umsdirtyratio=20
+    
+# Personal properties
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=20000000 \
-    persist.sys.usb.config=mass_storage \
-	persist.service.adb.enable=1
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=45
 	
+# Dalvik Properties
+# dexop-flags: "v=" n|r|a, "o=" n|v|a|f, "m=y" register map
+# v=verify o=optimize: n=none r=remote a=all f=full v=verified
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.lockprof.threshold=500 \
+    dalvik.vm.dexopt-flags=m=y \
+    dalvik.vm.checkjni=false
+    
+# We have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+# Camera (video recording)
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.camcorder.disablemeta=1 \
+    rw.media.record.hasb=0
+
+# Qcom
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware=1 \
+    dev.pm.dyn_samplingrate=1 \
+    ro.vendor.extension_library=/system/lib/libqc-opt.so
+
 PRODUCT_PACKAGES += \
     ContactsWidgets
     
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
-
-PRODUCT_VERSION_MAINTENANCE := 4
 
 VENDOR_WIPE_USER_DATA := true
 VENDOR_COPY_USER_DATA := true

@@ -13,8 +13,12 @@
 # limitations under the License.
 
 LOCAL_PATH := $(my-dir)
+
+ifeq ($(TARGET_BOARD_PLATFORM),qsd8k)
 subdir_makefiles := \
 	$(LOCAL_PATH)/libsensors/Android.mk \
+	$(LOCAL_PATH)/power/Android.mk \
 	$(LOCAL_PATH)/liblights/Android.mk
 
 include $(subdir_makefiles)
+endif
