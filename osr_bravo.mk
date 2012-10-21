@@ -1,19 +1,30 @@
 TEAM_PRODUCT := bravo
 TINY_GAAPS := True
 
-$(call inherit-product, vendor/osr/products/high_telephony_device.mk)
+# Specify phone tech before including full_phone
+$(call inherit-product, vendor/osr/config/gsm.mk)
 
-$(call inherit-product, vendor/osr/products/usbaccessory.mk)
+# Inherit some common OSR stuff.
+$(call inherit-product, vendor/osr/config/common_full_phone.mk)
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-$(call inherit-product, vendor/osr/products/flash.mk)
+# The gps config appropriate for this device
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product, vendor/osr/products/hdpi.mk)
+# Add Google apps
+#$(call inherit-product, vendor/google/minimal.mk)
+#$(call inherit-product, vendor/google/products/tts_support.mk)
+#$(call inherit-product, vendor/google/products/maps_support.mk)
+#$(call inherit-product, vendor/google/products/facelock_support.mk)
+#$(call inherit-product, vendor/google/products/youtube_support.mk)
 
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
 $(call inherit-product, device/htc/bravo/kernel.mk)
 
-$(call inherit-product, vendor/osr/products/themes_common.mk)
+$(call inherit-product, vendor/osr/config/themes_common.mk)
 
 # Setup device specific product configuration.
 PRODUCT_NAME := osr_bravo
@@ -94,10 +105,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 PRODUCT_PACKAGES += \
-    ContactsWidgets
+    ContactsWidgets \
+    Androidian-6-100
     
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
 
 VENDOR_WIPE_USER_DATA := true
 VENDOR_COPY_USER_DATA := true
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
