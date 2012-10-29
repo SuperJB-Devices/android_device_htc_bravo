@@ -1,30 +1,28 @@
 TEAM_PRODUCT := bravo
 TINY_GAAPS := True
 
-# Specify phone tech before including full_phone
-$(call inherit-product, vendor/osr/config/gsm.mk)
-
 # Inherit some common OSR stuff.
-$(call inherit-product, vendor/osr/config/common_full_phone.mk)
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, vendor/osr/config/medium_phone.mk)
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-# Add Google apps
-#$(call inherit-product, vendor/google/minimal.mk)
-#$(call inherit-product, vendor/google/products/tts_support.mk)
-#$(call inherit-product, vendor/google/products/maps_support.mk)
-#$(call inherit-product, vendor/google/products/facelock_support.mk)
-#$(call inherit-product, vendor/google/products/youtube_support.mk)
 
 $(call inherit-product, device/htc/bravo/bravo.mk)
 
 $(call inherit-product, device/htc/bravo/kernel.mk)
 
 $(call inherit-product, vendor/osr/config/themes_common.mk)
+
+$(call inherit-product, vendor/osr/config/livewallpapers.mk)
+
+$(call inherit-product, vendor/osr/config/flash.mk)
+
+$(call inherit-product, vendor/google/essencial.mk)
+$(call inherit-product, vendor/google/products/talk_support.mk)
+$(call inherit-product, vendor/google/products/voicesearch_support.mk)
+$(call inherit-product, vendor/google/products/music_support.mk)
+
+$(call inherit-product, vendor/htc/beats/beats.mk)
 
 # Setup device specific product configuration.
 PRODUCT_NAME := osr_bravo
@@ -52,7 +50,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.hsdpa.category=8 \
     ro.ril.hsupa.category=5 \
     ro.ril.hsxpa=2 \
-    ro.ril.def.agps.mode=2 
+    ro.ril.def.agps.mode=2 \
+    video.accelerate.hw=1
+    debug.performance.tuning=1 \
+    ro.max.fling_velocity=12000 \
+    ro.min.fling_velocity=8000 \
+    windowsmgr.max_events_per_sec=150
     
 #    \    
 #    mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
@@ -104,11 +107,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dev.pm.dyn_samplingrate=1 \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
-PRODUCT_PACKAGES += \
-    ContactsWidgets \
-    Androidian-6-100
-    
-
 DEVICE_PACKAGE_OVERLAYS += device/htc/bravo/overlay
 
 VENDOR_WIPE_USER_DATA := true
@@ -117,3 +115,11 @@ VENDOR_COPY_USER_DATA := true
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
+
+#Skip test
+LIBCORE_SKIP_TESTS := true
+BLUEZ_SKIP_TESTS := true
+SKIA_SKIP_TESTS := true
+
+PRODUCT_LOCALES += hdpi
+

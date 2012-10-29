@@ -78,7 +78,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
     device/htc/bravo/media_profiles.xml:system/etc/media_profiles.xml
 
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
     device/htc/bravo/init.bravo.rc:root/init.bravo.rc \
