@@ -22,8 +22,6 @@ $(call inherit-product, vendor/google/products/talk_support.mk)
 $(call inherit-product, vendor/google/products/voicesearch_support.mk)
 $(call inherit-product, vendor/google/products/music_support.mk)
 
-$(call inherit-product, vendor/htc/beats/beats.mk)
-
 # Setup device specific product configuration.
 PRODUCT_NAME := osr_bravo
 PRODUCT_BRAND := htc_wwe
