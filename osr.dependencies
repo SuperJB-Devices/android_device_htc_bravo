@@ -1,0 +1,6 @@
+[
+    {
+        "repository": "SuperJB-Vendor/android_vendor_htc_bravo",
+        "target_path": "vendor/htc/bravo"
+    }
+]
