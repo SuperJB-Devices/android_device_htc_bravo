@@ -79,6 +79,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 BOARD_VENDOR_USE_AKMD := akm8973
 
 BOARD_USE_FROYO_LIBCAMERA := true
+BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 #BOARD_HAVE_FM_RADIO := true
 #BOARD_FM_DEVICE := bcm4329
@@ -141,7 +142,13 @@ BOARD_USE_OLD_AVC_ENCODER := true
 BOARD_NO_BFRAMES := true
 
 # Override kernel toolchain. (4.6 is too unstable)
-ifeq ($(LINARO_BUILD),)
 KERNEL_TOOLCHAIN_PREFIX:=$(ANDROID_BUILD_TOP)/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-
-endif
+TARGET_PREBUILT_KERNEL := device/htc/bravo/kernel
+TARGET_KERNEL_CONFIG := superteam_bravo_defconfig
+BOARD_KERNEL_CMDLINE := no_console_suspend=1 msmsdcc_sdioirq=1 wire.search_count=5
+BOARD_KERNEL_BASE := 0x20000000
+BOARD_KERNEL_NEW_PPPOX := true
+
+PRODUCT_COPY_FILES += \
+    device/htc/bravo/kernel:kernel
 
