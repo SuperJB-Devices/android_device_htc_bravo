@@ -30,10 +30,10 @@ a2sdmount=`grep -q -e $SD_EXT_PART /proc/mounts; echo $?`
 if [ $a2sdmount == 1 ]
 then
 	mount -o rw,remount /system
-    mount -o noatime,nodiratime -t ext3 $SD_EXT_PART $SD_EXT_DIR
+    mount -t ext3 $SD_EXT_PART $SD_EXT_DIR
     if [ $? != 0 ]
     then
-	    mount -o noatime,nodiratime -t ext4 $SD_EXT_PART $SD_EXT_DIR
+	    mount -t ext4 $SD_EXT_PART $SD_EXT_DIR
     	if [ $? != 0 ]
     	then
     		mount -o ro,remount /system

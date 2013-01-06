@@ -28,6 +28,8 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/htc/bravo/BoardConfigVendor.mk
 
+TARGET_ARCH := arm
+
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := bravo
 
@@ -74,6 +76,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 3200
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_LEGACY_QCOM := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 
 BOARD_VENDOR_USE_AKMD := akm8973
@@ -122,6 +125,7 @@ TARGET_HAVE_BYPASS := false
 
 # RIL
 BOARD_USE_NEW_LIBRIL_HTC := true
+BOARD_USES_HC_RADIO := true 
 
 # Misc
 BOARD_USE_OPENSSL_ENGINE := true

@@ -17,18 +17,13 @@ $(call inherit-product, vendor/osr/config/livewallpapers.mk)
 
 $(call inherit-product, vendor/osr/config/flash.mk)
 
-$(call inherit-product, vendor/google/essencial.mk)
-$(call inherit-product, vendor/google/products/talk_support.mk)
-$(call inherit-product, vendor/google/products/voicesearch_support.mk)
-$(call inherit-product, vendor/google/products/music_support.mk)
-
 # Setup device specific product configuration.
 PRODUCT_NAME := osr_bravo
 PRODUCT_BRAND := htc_wwe
 PRODUCT_DEVICE := bravo
 PRODUCT_MODEL := HTC Desire
 PRODUCT_MANUFACTURER := HTC
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=htc_bravo BUILD_FINGERPRINT=htc_wwe/htc_bravo/bravo:2.3.3/GRI40/96875.1:user/release-keys TARGET_BUILD_TYPE=userdebug BUILD_VERSION_TAGS=release-keys PRIVATE_BUILD_DESC="3.14.405.1 CL96875 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=htc_bravo BUILD_FINGERPRINT=htc_wwe/htc_bravo/bravo:2.3.3/GRI40/96875.1:user/release-keys TARGET_BUILD_TYPE=eng BUILD_VERSION_TAGS=release-keys
 
 # Extra RIL settings
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -49,16 +44,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.hsupa.category=5 \
     ro.ril.hsxpa=2 \
     ro.ril.def.agps.mode=2 \
-    video.accelerate.hw=1
+    video.accelerate.hw=1 \
     debug.performance.tuning=1 \
     ro.max.fling_velocity=12000 \
     ro.min.fling_velocity=8000 \
-    windowsmgr.max_events_per_sec=150
-    
-#    \    
-#    mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
-#    persist.sys.usb.config=mass_storage \
-#	persist.service.adb.enable=1
+    mobiledata.interfaces=rmnet0,rmnet1,rmnet2 \
+	persist.service.adb.enable=1
     
 # Hardware Rendering Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -120,4 +111,6 @@ BLUEZ_SKIP_TESTS := true
 SKIA_SKIP_TESTS := true
 
 PRODUCT_LOCALES += hdpi
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 

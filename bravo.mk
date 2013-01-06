@@ -27,8 +27,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.enable.prl.recognition=1
 
 # This is a high density device with more memory, so larger vm heaps for it.
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapsize=32m
+$(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
 
 # Sensors
 PRODUCT_PACKAGES := \
