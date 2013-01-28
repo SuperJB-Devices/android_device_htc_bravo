@@ -49,6 +49,10 @@ PRODUCT_PACKAGES += \
     copybit.qsd8k \
     gralloc.qsd8k \
     hwcomposer.qsd8k
+    
+#wlan
+PRODUCT_PACKAGES += \
+	libnetcmdiface
 
 # Omx
 PRODUCT_PACKAGES += \
